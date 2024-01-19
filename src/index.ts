@@ -5,16 +5,17 @@ import rootRouter from './routes';
 import { PORT } from './secrets';
 import { SignUpSchema } from './schema/user';
 
-export const prismaClient = new PrismaClient({ log: ['query'] }).$extends({
-  query: {
-    user: {
-      create({ args, query }) {
-        args.data = SignUpSchema.parse(args.data);
-        return query(args);
-      },
-    },
-  },
-});
+export const prismaClient = new PrismaClient({ log: ['query'] });
+// .$extends({
+//   query: {
+//     user: {
+//       create({ args, query }) {
+//         args.data = SignUpSchema.parse(args.data);
+//         return query(args);
+//       },
+//     },
+//   },
+// });
 
 const app: Express = express();
 
