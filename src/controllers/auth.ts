@@ -8,6 +8,7 @@ import { JWT_SECRET } from '../secrets';
 import { UnprocessableEntity } from '../exceptions/validation';
 import { SignUpSchema } from '../schema/user';
 import { NotFoundException } from '../exceptions/notFound';
+import { User } from '@prisma/client';
 
 export const signup = async (
   req: Request,
@@ -64,4 +65,8 @@ export const login = async (
   );
 
   res.json({ user, token });
+};
+
+export const me = async (req: Request & { user: User }, res: Response) => {
+  return res.json(req.user);
 };
