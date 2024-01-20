@@ -6,8 +6,14 @@ import jwt from 'jsonwebtoken';
 import { prismaClient } from '../index';
 import { User } from '@prisma/client';
 
+declare module 'express' {
+  interface Request {
+    user?: User;
+  }
+}
+
 const authMiddleware = async (
-  req: Request & { user: User },
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
