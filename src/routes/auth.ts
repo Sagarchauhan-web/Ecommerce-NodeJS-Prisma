@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { login, me, signup } from '../controllers/auth';
 import { errorHandler } from '../error-handler';
 import authMiddleware from '../middlewares/auth';
+import adminMiddleware from '../middlewares/admin';
 
 const authRoutes: Router = Router();
 
