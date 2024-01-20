@@ -5,7 +5,8 @@ import rootRouter from './routes';
 import { PORT } from './secrets';
 import { SignUpSchema } from './schema/user';
 
-export const prismaClient = new PrismaClient({ log: ['query'] });
+export const prismaClient = new PrismaClient();
+// { log: ['query'] }
 // .$extends({
 //   query: {
 //     user: {
