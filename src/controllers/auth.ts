@@ -1,14 +1,13 @@
+import { User } from '@prisma/client';
 import { compareSync, hashSync } from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { prismaClient } from '..';
 import { BadRequestsException } from '../exceptions/badReaquest';
-import { ErrorCodes } from '../exceptions/root';
-import { JWT_SECRET } from '../secrets';
-import { UnprocessableEntity } from '../exceptions/validation';
-import { SignUpSchema } from '../schema/user';
 import { NotFoundException } from '../exceptions/notFound';
-import { User } from '@prisma/client';
+import { ErrorCodes } from '../exceptions/root';
+import { SignUpSchema } from '../schema/user';
+import { JWT_SECRET } from '../secrets';
 
 export const signup = async (
   req: Request,
@@ -19,7 +18,7 @@ export const signup = async (
   const { email, password, name } = req.body;
 
   let user = await prismaClient.user.findFirst({ where: { email: email } });
-  console.log(user);
+
   if (user) {
     console.log('here');
     throw new BadRequestsException(
