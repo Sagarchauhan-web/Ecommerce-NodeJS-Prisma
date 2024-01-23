@@ -5,7 +5,24 @@ import rootRouter from './routes';
 import { PORT } from './secrets';
 import { SignUpSchema } from './schema/user';
 
-export const prismaClient = new PrismaClient();
+export const prismaClient = new PrismaClient().$extends({
+  result: {
+    address: {
+      formattedAddress: {
+        needs: {
+          lineOne: true,
+          lineTwo: true,
+          city: true,
+          country: true,
+          pincode: true,
+        },
+        compute: (addr) => {
+          return `${addr.lineOne}, ${addr.lineTwo}, ${addr.city}, ${addr.country}-${addr.pincode}}`;
+        },
+      },
+    },
+  },
+});
 // { log: ['query'] }
 // .$extends({
 //   query: {
