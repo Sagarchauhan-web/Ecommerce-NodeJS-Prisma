@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+enum Role {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+}
 export const SignUpSchema = z.object({
   name: z.string(),
   email: z.string().email(),
@@ -18,4 +22,8 @@ export const UpdateUserSchema = z.object({
   name: z.string().optional(),
   defaultShippingAddress: z.number().optional(),
   defaultBillingAddress: z.number().optional(),
+});
+
+export const UpdateUserRoleSchema = z.object({
+  role: z.enum([Role.ADMIN, Role.USER]),
 });

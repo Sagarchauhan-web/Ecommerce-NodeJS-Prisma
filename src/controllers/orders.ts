@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { prismaClient } from '..';
-import cart from '../routes/cart';
 import { NotFoundException } from '../exceptions/notFound';
 import { ErrorCodes } from '../exceptions/root';
 
